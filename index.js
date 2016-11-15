@@ -7,8 +7,8 @@ function checksForErrors(err, res) { // eslint-disable-line
     return err;
   }
 
-  if (res && res.body && res.body.fault) {
-    return new UhuraError(res.body.fault);
+  if (res && res.body && res.body.Fault) {
+    return new UhuraError(res.body.Fault);
   }
 
   return null;
@@ -34,7 +34,11 @@ class UhuraRequest extends superagent.Request {
 
 function getUhura(constApiPath, constHeaders) {
   let defaultHeaders = constHeaders || null;
-  let apiPath = constApiPath ? setApiPath(constApiPath) : null;
+  let apiPath;
+
+  if (constApiPath) {
+    setApiPath(constApiPath);
+  }
 
   function getDefaultHeaders() {
     return defaultHeaders;
