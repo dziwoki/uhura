@@ -14,8 +14,8 @@ function checksForErrors(err, res) { // eslint-disable-line
 }
 
 class UhuraRequest extends superagent.Request {
-  wrapRequestErrors(err) {
-    return checksForErrors(err);
+  wrapRequestErrors(err, res) {
+    return checksForErrors(err, res);
   }
 
   end(cb) {

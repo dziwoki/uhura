@@ -18,9 +18,12 @@ function getUhura(constApiPath, constHeaders) {
       throw new Error('Base Api Path must be set!');
     }
 
-    const url = `${apiPath}/${serviceUrl.replace(/$\//, '')}`;
-    const request = new BaseClass(method, url, ...args);
+    let url = serviceUrl;
+    if (serviceUrl.indexOf('http://') !== 0 && serviceUrl.indexOf('https://') !== 0) {
+      url = `${apiPath}/${serviceUrl.replace(/$\//, '')}`;
+    }
 
+    const request = new BaseClass(method, url, ...args);
     Object.keys(getDefaultHeaders()).forEach(header => {
       if (defaultHeaders[header] !== null) {
         request.set(header, defaultHeaders[header]);
