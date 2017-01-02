@@ -1,6 +1,6 @@
 {
   "name": "uhura",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Es6 wrapper around superagent. It makes integration with some, sorry! this is a secret, API easier.",
   "main": "index.js",
   "scripts": {

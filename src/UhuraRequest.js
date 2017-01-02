@@ -1,13 +1,13 @@
 const superagent = require('superagent');
 const UhuraError = require('./UhuraError');
 
-function checksForErrors(err, res) { // eslint-disable-line
+function checksForErrors(err, res, url) { // eslint-disable-line
   if (err && (err.status || err.timeout)) {
     return err;
   }
 
   if (res && res.body && res.body.Fault) {
-    return new UhuraError(res.body.Fault);
+    return new UhuraError(url, res.body.Fault);
   }
 
   return err;
@@ -15,7 +15,7 @@ function checksForErrors(err, res) { // eslint-disable-line
 
 class UhuraRequest extends superagent.Request {
   wrapRequestErrors(err, res) {
-    return checksForErrors(err, res);
+    return checksForErrors(err, res, this.url);
   }
 
   end(cb) {

@@ -5,8 +5,8 @@ function getErrorSeverity(level) {
 }
 
 class UhuraError extends Error {
-  constructor(uhuraFault) {
-    const message = `UHURA returned Error with code: "${uhuraFault.Code}"; message: "${uhuraFault.Message}"`;
+  constructor(url, uhuraFault) {
+    const message = `UHURA request for: ${url} returned an Error with code: "${uhuraFault.Code}"; message: "${uhuraFault.Message}"`;
     super(message);
 
     this.code = uhuraFault.Code;
